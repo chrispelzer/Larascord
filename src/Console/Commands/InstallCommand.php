@@ -75,6 +75,12 @@ class InstallCommand extends Command
             shell_exec('php artisan breeze:install blade');
         }
 
+        // Install Laravel Sanctum
+        $this->call('install:api', [
+            '--composer' => $this->option('composer'),
+            '--without-migration-prompt' => 'true',
+        ]);
+
         // Appending the secrets to the .env file
         $this->appendToEnvFile();
 
