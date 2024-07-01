@@ -47,6 +47,14 @@ class InstallCommand extends Command
     private ?string $prefix;
 
     /*
+     * The redirect URI.
+     *
+     * @var string|null
+     */
+    private ?string $redirectLogin;
+
+
+    /*
      * Whether dark mode should be enabled.
      *
      * @var bool|null
@@ -62,6 +70,7 @@ class InstallCommand extends Command
         $this->clientId = $this->ask('What is your Discord application\'s client id?');
         $this->clientSecret = $this->ask('What is your Discord application\'s client secret?');
         $this->prefix = $this->ask('What route prefix should Larascord use?', 'larascord');
+        $this->redirectLogin = $this->ask('What is the redirect URI after the user logs in?', '/dashboard');
         $this->darkMode = $this->confirm('Do you want to install laravel/breeze with dark mode?', true);
 
         // Validating the user's input
@@ -179,6 +188,9 @@ class InstallCommand extends Command
 
         (new Filesystem())->append('.env',PHP_EOL);
         (new Filesystem())->append('.env','LARASCORD_SCOPE=identify&email');
+
+        (new Filesystem())->append('.env',PHP_EOL);
+        (new Filesystem())->append('.env','LARASCORD_REDIRECT_AFTER_LOGIN='.$this->redirectLogin);
     }
 
     /**

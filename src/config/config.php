@@ -61,6 +61,18 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Redirect after Login URI
+    |--------------------------------------------------------------------------
+    |
+    | This is the URI the user will be redirected to after successfully logging in to
+    | your application.
+    |
+    */
+
+    'redirect_after_login' => env('LARASCORD_REDIRECT_AFTER_LOGIN', '/dashboard'),
+
+    /*
+    |--------------------------------------------------------------------------
     | Scopes
     |--------------------------------------------------------------------------
     |
